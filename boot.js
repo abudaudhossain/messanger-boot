@@ -28,11 +28,9 @@ const question1 = () => {
 const main = async () => {
     while (true) {
         let getData = await question1();
-        // console.log(getData)
-
         // work where
-        const ans = data.find(info => info.questions.includes(getData));
-        //    console.log(ans)
+        const ans = data.find(info => info.questions.includes(getData.toLowerCase()));
+ 
         if (ans) {
 
             console.log(ans.answer)
@@ -44,8 +42,6 @@ const main = async () => {
             console.log(`Your answer: ${boosAnswer}`);
             saveToData(boosAnswer, getData)
         }
-
-
     }
 }
 
@@ -58,12 +54,14 @@ const  getAnswer = async (ques) => {
 }
 
 const saveToData = (ans , ques) =>{
-    const info = data.find(info => info.answer === ans);
-    if(info){
-        console.log(info.questions);
-        info.questions.push(ques);
-        console.log(info.questions);
+    const info = data.find(info => info.answer.toLowerCase === ans.toLowerCase());
+    if(info){       
+        info.questions.push(ques.toLowerCase());
     }else{
-        console.log("Please done work")
+        const newData = {
+            questions: [ques.toLowerCase()],
+            answer:ans.toLowerCase()
+        }
+        data.push(newData);
     }
 }
