@@ -52,7 +52,6 @@ const main = async () => {
         const ans = data.find(info => info.questions.includes(getData.toLowerCase()));
 
         if (ans) {
-
             console.log(ans.answer)
         } else {
             console.log("Please waite... I can not know. I ask my boss then answer this question.")
