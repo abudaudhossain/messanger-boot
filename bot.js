@@ -25,12 +25,32 @@ const question1 = () => {
     })
 }
 
+
+
+const getAnswer = async (ques) => {
+    console.log(`hello, boss please give me answer this question.. ${ques}`)
+    const boosAnswer = await question1();
+    return boosAnswer;
+}
+
+const saveToData = (ans, ques) => {
+    const info = data.find(info => info.answer.toLowerCase === ans.toLowerCase());
+    if (info) {
+        info.questions.push(ques.toLowerCase());
+    } else {
+        const newData = {
+            questions: [ques.toLowerCase()],
+            answer: ans.toLowerCase()
+        }
+        data.push(newData);
+    }
+}
 const main = async () => {
     while (true) {
         let getData = await question1();
         // work where
         const ans = data.find(info => info.questions.includes(getData.toLowerCase()));
- 
+
         if (ans) {
 
             console.log(ans.answer)
@@ -46,22 +66,3 @@ const main = async () => {
 }
 
 main();
-
-const  getAnswer = async (ques) => {
-    console.log(`hello, boss please give me answer this question.. ${ques}`)
-    const boosAnswer = await question1();
-    return boosAnswer;
-}
-
-const saveToData = (ans , ques) =>{
-    const info = data.find(info => info.answer.toLowerCase === ans.toLowerCase());
-    if(info){       
-        info.questions.push(ques.toLowerCase());
-    }else{
-        const newData = {
-            questions: [ques.toLowerCase()],
-            answer:ans.toLowerCase()
-        }
-        data.push(newData);
-    }
-}
